@@ -1,22 +1,15 @@
+#include "tree.hpp"
 
-#include "Tree.hpp"
-
-
-class Forest {
+class Forest
+{
     private:
-        int **tab;
-        int tabX, tabY;
-        vector<Tree*> trees;
+    int H, W;
+    vector<Tree*> trees;
+    int **tab;
 
     public:
-        
-        Forest();
-        ~Forest();
-        
-        void printTab();
-        void AddTree(int x, int y, int h, char s, string color);
-
-
-
-
+    Forest();
+    ~Forest();
+    void AddTree (int x, int y, int h, char s, string c);
+    void printTree();
 };
