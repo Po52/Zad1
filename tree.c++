@@ -1,88 +1,92 @@
 #include <iostream>
+#include <string.h>
 using namespace std;
-#include "Tree.hpp"
+#include "tree.hpp"
 
 void Tree::printTree()
 {
-   int i,j;
-  
-   for(i=0; i<height;i++){
-     for(j=height-i; j>0; j--)
-       cout << " ";
-     
-     for(j=0; j<2*i+1; j++){
-        cout << symbol;
-        //tab[i][j+height-i] = 1;
-     }
+    int i, j;
+    std:: string c;
 
-      cout << endl;
-   }
-   cout << "\033[0m" << endl;  // color off
+    for(j=0; j<height; j++)
+    {
+        
+        for(i=height-j; i>0; i--)
+            cout << " ";
 
-   printTreeFromTab();
-  
+        for(i=0; i<2*j+1; i++)
+            cout << symbol;
+
+        cout << endl;
+    }
+    cout << "\033[0m" << endl; 
+    PrintTreeFromTab();
 }
 
-void Tree::printTreeFromTab()
+void Tree:PrintTreeFromTab()
 {
-  int i,j;
-  for(i=0; i<height; i++){ 
-    for(j=0; j<2*height+1; j++)
-       cout << tab[i][j];
-    cout << endl;
-  }
+    int i,j;
+    for(i=0;i<height; i++)
+    {
+        for(j=0; j<2*height+1; j++)
+        {
+            cout << tab[i][j];
+        }
+        cout << endl;
+    }
 }
 
-Tree::Tree(int h, char s, string c) //konstruktor
+Tree::Tree(int h, char s, string c ) //konstruktor
 {
-  int i,j;
-  height = h;  
-  symbol = s;
-  //color = c;
+    height = h;
+    symbol = s;
+    //color = c;
+    int i, j;
 
-  if(c == "red") color = "\033[1;31m";
-  if(c == "green") color = "\033[0;32m";
-  if(c == "bgreen") color = "\033[1;32m";
-  if(c == "yellow") color = "\033[1;33m";
-  if(c == "blue") color = "\033[1;34m";
+    if(c == "red") color = "\033[1;31m]";
+    if(c == "green") color = "\033[0;32m]";
+    if(c == "bgreen") color = "\033[1;32m]";
 
-  tab = new int*[height];
-  for(i=0; i<height; i++)
-  { 
-    tab[i] = new int[2*height+1];
-    for(j=0; j<2*height+1; j++)
-      {
-       tab[i][j] = 0;
-      }
-  }
-
-   for(i=0; i<height;i++)
-   {    
-     for(j=0; j<2*i+1; j++)
-     {
-        tab[i][j+height-i] = 1;
-     }
-   }
+    tab = new int*[height];
+    for(j=0; j<height; j++)
+    {
+        tab[j] = new int[2*height+1];
+        for(i=0; i<2*height+1; i++)
+        {
+            tab[j][i]=0;
+        }
+    }
+    for(j=0; j<height; j++)
+    {
+        for(i=0; i<2*j+1; i++)
+        {
+            tab[j][i+height-j]=1;
+        }
+    }
 
 }
 
 Tree::~Tree()
 {
-  int i;
-  
-  cout << "kasuje drzewo\n";
-  for(i=0; i<height; i++)
+    int j;
+
+    for(j=0; j<height; j++)
     {
-     delete tab[i];
+        delete tab[j];
     }
-  delete tab;
-
+    delete tab;
 }
 
-int Tree::getHeight(){
-  return height;
+int Tree:Height()
+{
+    return height;
 }
 
-int Tree::getWidth(){
-  return height*2+1;
+int Tree:Width()
+{
+    return height*2+1;
 }
+
+
+
+//   cout << "\033[1;31m Sample Text \033[0m"; <- daje kolory tekstu
